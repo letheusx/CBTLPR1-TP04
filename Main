@@ -38,4 +38,15 @@ public class Main {
         System.out.println("----------------------------------------");
         System.out.println("Data por parâmetros: ");
         Data dataParametros = new Data(30, 9, 2021);
-        System.out.println("Data formatada 1
+        System.out.println("Data formatada 1: " + dataParametros.mostra1());
+        System.out.println("Data formatada 2: " + dataParametros.mostra2());
+        System.out.println("Ano bissexto: " + dataParametros.bissexto());
+        System.out.println("Dias transcorridos: " + dataParametros.diasTranscorridos());
+        dataParametros.apresentaDataAtual();
+        
+        // Usando métodos retDia, retMes e retAno
+        System.out.println("Dia: " + dataParametros.retDia());
+        System.out.println("Mês: " + dataParametros.retMes());
+        System.out.println("Ano: " + dataParametros.retAno());
+    }
+}
