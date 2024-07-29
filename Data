@@ -3,16 +3,16 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Data {
-    // Atributos
+    // Definindo atributos
     private int dia;
     private int mes;
     private int ano;
     Scanner sc = new Scanner(System.in);
 
-    // Construtor sem parâmetros
+    // Construtor que permite o usuário digitar os valores e inicializar os atributos
     public Data() {
-        boolean dataValida = false;
-        while (!dataValida) {
+        boolean valido = false;
+        while (!valido) {
             try {
                 System.out.print("Digite o dia: ");
                 int d = sc.nextInt();
@@ -20,24 +20,25 @@ public class Data {
                 int m = sc.nextInt();
                 System.out.print("Digite o ano: ");
                 int a = sc.nextInt();
-                if (validarData(d, m, a)) {
+                if (validaData(d, m, a)) {
+                    // Inicializando os atributos
                     this.dia = d;
                     this.mes = m;
                     this.ano = a;
-                    dataValida = true;
+                    valido = true; // Termina o loop se os valores forem válidos
                 } else {
-                    System.out.println("Data inválida. Tente novamente.");
+                    System.out.println("Data inválida, tente novamente.");
                 }
             } catch (Exception e) {
-                System.out.println("Entrada inválida. Tente novamente.");
-                sc.next(); // Limpa o buffer do scanner
+                System.out.println("Entrada inválida, tente novamente.");
+                sc.next(); // Limpar o buffer do scanner
             }
         }
     }
 
     // Construtor com parâmetros
     public Data(int d, int m, int a) {
-        if (validarData(d, m, a)) {
+        if (validaData(d, m, a)) {
             this.dia = d;
             this.mes = m;
             this.ano = a;
@@ -48,7 +49,7 @@ public class Data {
 
     // Métodos de entrada com parâmetros
     public void entraDia(int d) {
-        if (validarData(d, this.mes, this.ano)) {
+        if (validaData(d, this.mes, this.ano)) {
             this.dia = d;
         } else {
             throw new IllegalArgumentException("Dia inválido.");
@@ -56,7 +57,7 @@ public class Data {
     }
 
     public void entraMes(int m) {
-        if (validarData(this.dia, m, this.ano)) {
+        if (validaData(this.dia, m, this.ano)) {
             this.mes = m;
         } else {
             throw new IllegalArgumentException("Mês inválido.");
@@ -64,7 +65,7 @@ public class Data {
     }
 
     public void entraAno(int a) {
-        if (validarData(this.dia, this.mes, a)) {
+        if (validaData(this.dia, this.mes, a)) {
             this.ano = a;
         } else {
             throw new IllegalArgumentException("Ano inválido.");
@@ -78,14 +79,14 @@ public class Data {
             try {
                 System.out.print("Digite o dia: ");
                 int d = sc.nextInt();
-                if (validarData(d, this.mes, this.ano)) {
+                if (validaData(d, this.mes, this.ano)) {
                     this.dia = d;
                     valido = true;
                 } else {
-                    System.out.println("Dia inválido. Tente novamente.");
+                    System.out.println("Dia inválido, tente novamente.");
                 }
             } catch (Exception e) {
-                System.out.println("Entrada inválida. Tente novamente.");
+                System.out.println("Entrada inválida, tente novamente.");
                 sc.next(); 
             }
         }
@@ -97,14 +98,14 @@ public class Data {
             try {
                 System.out.print("Digite o mês: ");
                 int m = sc.nextInt();
-                if (validarData(this.dia, m, this.ano)) {
+                if (validaData(this.dia, m, this.ano)) {
                     this.mes = m;
                     valido = true;
                 } else {
-                    System.out.println("Mês inválido. Tente novamente.");
+                    System.out.println("Mês inválido, tente novamente.");
                 }
             } catch (Exception e) {
-                System.out.println("Entrada inválida. Tente novamente.");
+                System.out.println("Entrada inválida, tente novamente.");
                 sc.next(); 
             }
         }
@@ -116,14 +117,14 @@ public class Data {
             try {
                 System.out.print("Digite o ano: ");
                 int a = sc.nextInt();
-                if (validarData(this.dia, this.mes, a)) {
+                if (validaData(this.dia, this.mes, a)) {
                     this.ano = a;
                     valido = true;
                 } else {
-                    System.out.println("Ano inválido. Tente novamente.");
+                    System.out.println("Ano inválido, tente novamente.");
                 }
             } catch (Exception e) {
-                System.out.println("Entrada inválida. Tente novamente.");
+                System.out.println("Entrada inválida, tente novamente.");
                 sc.next();
             }
         }
@@ -176,7 +177,7 @@ public class Data {
     }
 
     // Método para validar a data
-    private boolean validarData(int d, int m, int a) {
+    private boolean validaData(int d, int m, int a) {
         if (m < 1 || m > 12) return false;
         int[] diasPorMes = {31, (bissexto(a) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         return d >= 1 && d <= diasPorMes[m - 1];
